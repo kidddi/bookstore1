@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title>Secured</title>
+</head>
+<body>
+<!--/*@thymesVar id="recipes" type="java.util.List"*/-->
+<!--/*@thymesVar id="recipe" type="com.globallogic.bookstore.domain.Book"*/-->
+	<div layout:fragment="content" th:remove="tag">
+		<h2>Books List</h2>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Book Name</th>
+					<th>Price</th>
+					<th>Buy</th>
+					<th>Times Bought</th>
+				</tr>
+			</thead>
+			<tbody>				
+				<tr th:each="book : ${books}">
+					<td th:text="${book.id}">34</td>
+					<td th:text="${book.name}">Tasty Goodnees</td>
+					<td th:text="${book.price}">20</td>
+					<td><a href="#"	th:href="@{'/book/' + ${book.id} + '/show'}">Buy</a></td>
+					<td th:text="${book.timesBought}">4</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2>Basket</h2>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Book Name</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody>				
+				<tr th:each="book : ${books}">
+					<td th:text="${book.id}">34</td>
+					<td th:text="${book.name}">Tasty Goodnees</td>
+					<td th:text="${book.price}">20</td>			
+					<td><a href="#"	th:href="@{'/book/' + ${book.id} + '/show'}">Checkout</a></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold" colspan="2">Total price</td>
+					<td style="font-weight: bold">20</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>
+			<a href="/" th:href="@{/}">Back to home page</a>
+		</p>
+	</div>
+</body>
+</html>
