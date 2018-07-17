@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title>Secured</title>
+</head>
+<body>	
+	<!--/*@thymesVar id="recipe" type="com.globallogic.bookstore.domain.Book"*/-->
+	<div layout:fragment="content" th:remove="tag">
+		<h2>Books List</h2>
+		<form th:object="${book}" th:action="@{/book/}" method="post">
+			<div class="form-row align-items-center">
+				<div class="col-sm-3">
+					<input type="text" class="form-control" th:field="*{name}" placeholder="Book name">
+				</div>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" th:field="*{price}"placeholder="Price">
+				</div>
+				<div class="col-auto my-1">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+		</form>
+		<p>
+			<a href="/" th:href="@{/admin/books}">Back to book list</a>
+		</p>
+	</div>
+</body>
+</html>

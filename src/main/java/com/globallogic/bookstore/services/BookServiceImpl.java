@@ -16,7 +16,7 @@ import com.globallogic.bookstore.repository.BookRepository;
 @Service
 public class BookServiceImpl implements BookService {
 
-	private static int moneyEarned;
+	private int moneyEarned;
 	
 	private final BookToBookDTO bookToBookDto;
 	private final BookDTOToBook bookDTOToBook;
@@ -72,6 +72,15 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public int getMoneyEarned() {		
 		return moneyEarned;
+	}
+
+	@Override
+	public BookDTO saveBookDto(BookDTO bookDto) {
+		Book book = bookDTOToBook.convert(bookDto);
+		
+		Book savedBook = bookRepository.save(book);
+		
+		return bookToBookDto.convert(savedBook);
 	}
 
 

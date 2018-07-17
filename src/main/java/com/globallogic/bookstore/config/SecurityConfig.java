@@ -8,12 +8,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.globallogic.bookstore.web.LoggingAccessDeniedHandler;
+import com.globallogic.bookstore.web.UrlAuthenticationSuccessHandler;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private LoggingAccessDeniedHandler accessDeniedHandler;
+    
+    @Autowired
+    private UrlAuthenticationSuccessHandler authenticationSuccessHandler; 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -26,11 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/img/**",
                             "/webjars/**").permitAll()
                     .antMatchers("/user/**").hasRole("USER")
+                    .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/h2-console/**").hasRole("USER")
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/login")
+                    .loginProcessingUrl("/login")
+                    .successHandler(authenticationSuccessHandler)
                     .permitAll()
                 .and()
                 .logout()
@@ -51,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user").password("{noop}password").roles("USER")
             .and()
-                .withUser("admin").password("password").roles("ADMIN");
+                .withUser("admin").password("{noop}password").roles("ADMIN");
     }
 
 }

@@ -17,4 +17,6 @@ public interface BookService {
 	
 	int getMoneyEarned();
 
+	BookDTO saveBookDto(BookDTO bookDto);
+
 }
