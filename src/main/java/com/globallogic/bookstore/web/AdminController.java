@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class AdminController {	
 	
-	private final BookService bookService;	  
+	private final BookService bookService;
 
 	public AdminController(BookService bookService) {
 		this.bookService = bookService;
@@ -27,9 +27,9 @@ public class AdminController {
     public String adminIndex(Model model) {
     	log.debug("Getting Index page");
     	
-    	model.addAttribute("books", bookService.getAllBooks());   	
+    	model.addAttribute("books", bookService.getAllBooks());
     	
-        return "/admin/books";
+        return "admin/books";
     }
     
     @GetMapping("/admin/book/new")
@@ -37,7 +37,7 @@ public class AdminController {
     	
     	model.addAttribute("book", new BookDTO());
     	
-    	return "/admin/bookform";
+    	return "admin/bookform";
     }
     
     @PostMapping("book")

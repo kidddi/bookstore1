@@ -32,7 +32,7 @@ public class UserController {
     	model.addAttribute("totalPrice", user.calculateTotalPrice());
     	model.addAttribute("moneyEarned", bookService.getMoneyEarned());
     	
-        return "/user/books";
+        return "user/books";
     }
     
     @GetMapping("/book/{id}/buy")
