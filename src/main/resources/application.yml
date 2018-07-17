@@ -11,10 +11,11 @@ spring:
       hibernate:
         format_sql: true
   thymeleaf:
+    servlet:
+      content-type: text/html
     cache: false
     check-template: true
-    check-template-location: true
-    content-type: text/html
+    check-template-location: true    
     enabled: true
     encoding: UTF-8
     mode: HTML

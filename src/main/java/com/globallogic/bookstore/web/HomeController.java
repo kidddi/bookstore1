@@ -3,7 +3,9 @@ package com.globallogic.bookstore.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import com.globallogic.bookstore.domain.User;
 import com.globallogic.bookstore.services.BookService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 
 	private final BookService bookService;	
-	
-    public HomeController(BookService bookService) {
+	private final User user;    
+
+	public HomeController(BookService bookService, User user) {
 		this.bookService = bookService;
+		this.user = user;
 	}
 
 	@GetMapping("/")
@@ -28,8 +32,17 @@ public class HomeController {
     	log.debug("Getting Index page");
     	
     	model.addAttribute("books", bookService.getAllBooks());
+    	model.addAttribute("userBooks", user.getListBooks());
     	
         return "user/index";
+    }
+    
+    @GetMapping("/book/{id}/buy")
+    public String buyBook(@PathVariable String id) {
+    	
+    	user.addBook(bookService.getBookById(Long.valueOf(id)));
+    	
+    	return "redirect:/user";
     }
 
     @GetMapping("/login")
