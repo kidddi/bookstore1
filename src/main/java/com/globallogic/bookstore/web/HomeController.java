@@ -22,27 +22,33 @@ public class HomeController {
 		this.user = user;
 	}
 
-	@GetMapping("/")
-    public String root() {
-        return "index";
-    }
-
-    @GetMapping("/user")
+    @GetMapping("/user/books")
     public String userIndex(Model model) {
     	log.debug("Getting Index page");
     	
     	model.addAttribute("books", bookService.getAllBooks());
     	model.addAttribute("userBooks", user.getListBooks());
+    	model.addAttribute("totalPrice", user.calculateTotalPrice());
+    	model.addAttribute("moneyEarned", bookService.getMoneyEarned());
     	
-        return "user/index";
+        return "user/books";
     }
     
     @GetMapping("/book/{id}/buy")
     public String buyBook(@PathVariable String id) {
     	
     	user.addBook(bookService.getBookById(Long.valueOf(id)));
+    	bookService.setBookIsBoughtById(Long.valueOf(id));
+    	return "redirect:/user/books";
+    }
+    
+    @GetMapping("/user/book/{id}/checkout")
+    public String checkoutBook(@PathVariable String id) {
     	
-    	return "redirect:/user";
+    	user.removeBook(Long.valueOf(id));
+    	bookService.setBookIsReturnedById(Long.valueOf(id));
+    	
+    	return "redirect:/user/books";
     }
 
     @GetMapping("/login")

@@ -1,6 +1,6 @@
 insert into book(id, name, price, times_bought) 
-	values(21, '50 Steps', 100, 10);
+	values(21, 'Dark Grimoire', 666, 0);
 insert into book(id, name, price, times_bought) 
-	values(22, 'Some 50 Steps', 120, 1);
+	values(22, 'Book of Souls', 13, 0);
 insert into book(id, name, price, times_bought) 
-	values(23, 'New 50 Steps', 129, 8);
+	values(23, 'New 50 Steps', 129, 0);

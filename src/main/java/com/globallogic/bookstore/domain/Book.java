@@ -19,5 +19,13 @@ public class Book {
 	
 	private int price;
 	
-	private int timesBought;
+	private int timesBought = 0;
+	
+	public void buyBook() {
+		timesBought++;
+	}
+	
+	public void returnBook() {
+		timesBought--;
+	}
 }

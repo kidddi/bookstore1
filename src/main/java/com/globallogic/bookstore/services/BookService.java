@@ -11,4 +11,10 @@ public interface BookService {
 
 	BookDTO getBookById(Long l);
 
+	BookDTO setBookIsBoughtById(Long l);
+
+	BookDTO setBookIsReturnedById(Long l);
+	
+	int getMoneyEarned();
+
 }
