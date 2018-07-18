@@ -1,6 +1,7 @@
 ## Bookstore test task.
 
-user - password
-admin - password
+#### Docker image:   _docker pull kidddi/bookstore-docker_
 
-Docker image: docker pull kidddi/bookstore-docker
+**user** - password
+
+**admin** - password
